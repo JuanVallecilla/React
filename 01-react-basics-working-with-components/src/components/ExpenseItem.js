@@ -1,8 +1,7 @@
 import "./ExpenseItem.css";
 import ExpenseDate from "./ExpenseDate";
 
-function ExpenseItem(props) {
-  console.log(props.date);
+const ExpenseItem = (props) => {
   return (
     <div className="expense-item">
       <ExpenseDate date={props.date} />
@@ -13,6 +12,6 @@ function ExpenseItem(props) {
       <div className="expense-item__price">{props.amount}</div>
     </div>
   );
-}
+};
 
 export default ExpenseItem;
