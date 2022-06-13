@@ -11,6 +11,7 @@ const AddUser = (props) => {
   const addUserHandler = (event) => {
     event.preventDefault();
     inputValidation();
+    props.onAddUser(enteredUsername, enteredAge);
     clearInputs();
   };
 
