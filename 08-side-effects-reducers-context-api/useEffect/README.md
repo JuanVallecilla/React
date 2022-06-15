@@ -33,7 +33,7 @@ const MyComponent = (props) => {
   }, [timerIsActive, timerDuration]);
 };
 ```
-In this example:
+In the code example above:
 
 **timerIsActive** is added as a dependency because it's component state that may change when the component changes (e.g. because the state was updated)
 
