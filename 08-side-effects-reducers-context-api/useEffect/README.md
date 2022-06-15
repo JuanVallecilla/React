@@ -1,3 +1,5 @@
+<h1>What to add & Not to add as Dependencies</h1>
+
 You learned, that you should add "everything" you use in the effect function as a dependency - i.e. all state variables and functions you use in there.
 
 That is correct, but there are a few exceptions you should be aware of:
