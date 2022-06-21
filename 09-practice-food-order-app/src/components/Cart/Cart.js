@@ -22,7 +22,7 @@ const Cart = (props) => {
   const cartItems = (
     <ul className={styles["cart-items"]}>
       {cartCtx.items.map((item) => (
-        <CartItem {...item} onRemove={() => cartItemRemoveHandler(item.id)} onAdd={() => cartAddItemHandler(item)} />
+        <CartItem key={item.id} {...item} onRemove={() => cartItemRemoveHandler(item.id)} onAdd={() => cartAddItemHandler(item)} />
       ))}
     </ul>
   );
