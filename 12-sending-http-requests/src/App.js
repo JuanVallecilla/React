@@ -1,25 +1,24 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
 import MoviesList from "./components/MoviesList";
+import AddMovie from "./components/AddMovie";
 import "./App.css";
 
 function App() {
   const [movies, setMovies] = useState([]);
-  const [isLoading, setIsloading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const fetchMoviesHandler = useCallback(async () => {
-    setIsloading(true);
+    setIsLoading(true);
     setError(null);
-
     try {
-      const res = await fetch("https://swapi.dev/api/films/");
-
-      if (!res.ok) {
-        throw new Error("Something Went Wrong");
+      const response = await fetch("https://react-http-a01e3-default-rtdb.firebaseio.com/movies.json");
+      if (!response.ok) {
+        throw new Error("Something went wrong!");
       }
 
-      const data = await res.json();
+      const data = await response.json();
 
       const transformedMovies = data.results.map((movieData) => {
         return {
@@ -30,16 +29,19 @@ function App() {
         };
       });
       setMovies(transformedMovies);
-      setIsloading(false);
     } catch (error) {
       setError(error.message);
     }
-    setIsloading(false);
+    setIsLoading(false);
   }, []);
 
   useEffect(() => {
     fetchMoviesHandler();
   }, [fetchMoviesHandler]);
+
+  function addMovieHandler(movie) {
+    console.log(movie);
+  }
 
   let content = <p>Found no movies.</p>;
 
@@ -57,6 +59,9 @@ function App() {
 
   return (
     <React.Fragment>
+      <section>
+        <AddMovie onAddMovie={addMovieHandler} />
+      </section>
       <section>
         <button onClick={fetchMoviesHandler}>Fetch Movies</button>
       </section>
