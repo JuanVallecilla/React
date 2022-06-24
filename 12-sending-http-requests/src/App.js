@@ -5,15 +5,17 @@ import AddMovie from "./components/AddMovie";
 import "./App.css";
 
 function App() {
+  // Handling the states
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-
+  // GET REQUEST
   const fetchMoviesHandler = useCallback(async () => {
     setIsLoading(true);
     setError(null);
     try {
       const response = await fetch("https://react-http-a01e3-default-rtdb.firebaseio.com/movies.json");
+      //  Throw and generate error
       if (!response.ok) {
         throw new Error("Something went wrong!");
       }
@@ -42,6 +44,7 @@ function App() {
     fetchMoviesHandler();
   }, [fetchMoviesHandler]);
 
+  //POST REQUEST
   async function addMovieHandler(movie) {
     const res = await fetch("https://react-http-a01e3-default-rtdb.firebaseio.com/movies.json", {
       method: "POST",
