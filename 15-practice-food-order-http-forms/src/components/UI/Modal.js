@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 import ReactDOM from "react-dom";
 
 import styles from "./Modal.module.css";
@@ -9,10 +9,8 @@ const Backdrop = (props) => {
 
 const ModalOverlay = (props) => {
   return (
-    <div>
-      <div className={styles.modal}>
-        <div>{props.children}</div>
-      </div>
+    <div className={styles.modal}>
+      <div className={styles.content}>{props.children}</div>
     </div>
   );
 };
@@ -27,4 +25,5 @@ const Modal = (props) => {
     </Fragment>
   );
 };
+
 export default Modal;
