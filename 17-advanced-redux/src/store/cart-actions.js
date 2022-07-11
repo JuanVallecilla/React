@@ -17,7 +17,12 @@ export const fetchCartData = () => {
 
     try {
       const cartData = await fetchData();
-      dispatch(cartActions.replaceCart(cartData));
+      dispatch(
+        cartActions.replaceCart({
+          items: cartData.items || [],
+          totalQuantity: cartData.totalQuantity,
+        })
+      );
     } catch (error) {
       dispatch(uiActions.showNotification({ status: "error", title: "Error!", message: "Fetching cart data failed" }));
     }
@@ -29,7 +34,11 @@ export const sendCartData = (cart) => {
     dispatch(uiActions.showNotification({ status: "pending", title: "Sending...", message: "Sending cart data" }));
 
     const sendRequest = async () => {
-      const response = await fetch("https://react-http-a01e3-default-rtdb.firebaseio.com/cart.json", { method: "PUT", body: JSON.stringify(cart) });
+      const response = await fetch("https://react-http-a01e3-default-rtdb.firebaseio.com/cart.json", {
+        method: "PUT",
+        // creating an object to make sure we dont send the changed field.
+        body: JSON.stringify({ items: cart.items, totalQuantity: cart.totalQuantity }),
+      });
 
       if (!response.ok) {
         throw new Error("Sending cart data failed.");
