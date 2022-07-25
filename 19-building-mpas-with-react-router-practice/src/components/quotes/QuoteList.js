@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { useHistory, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import QuoteItem from "./QuoteItem";
 import classes from "./QuoteList.module.css";
@@ -15,24 +15,24 @@ const sortQuotes = (quotes, ascending) => {
 };
 
 const QuoteList = (props) => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const location = useLocation();
-  // console.log(history);
-  // console.log(location.pathname);
-  // console.log(location.search);
 
   const queryParams = new URLSearchParams(location.search);
+
   const isSortingAscending = queryParams.get("sort") === "asc";
+
   const sortedQuotes = sortQuotes(props.quotes, isSortingAscending);
 
   const changeSortingHandler = () => {
     // We can pass an object if we have more complex destination for
     // Example when query parameters are involved making it more readable\
     // if the URL's are more complex
-    history.push({
+    navigate({
       pathname: location.pathname,
       search: `?sort=${isSortingAscending ? "dec" : "asc"}`,
     });
+    // navigate(`${location.pathname}?sort=${isSortingAscending ? "dec" : "asc"}`);
     // history.push(`${location.pathname}?sort=${isSortingAscending ? "dec" : "asc"}`);
   };
 
