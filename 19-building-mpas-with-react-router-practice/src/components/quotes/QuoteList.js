@@ -17,6 +17,8 @@ const sortQuotes = (quotes, ascending) => {
 const QuoteList = (props) => {
   const history = useHistory();
   const location = useLocation();
+  // console.log(history);
+  // console.log(location.pathname);
   // console.log(location.search);
 
   const queryParams = new URLSearchParams(location.search);
@@ -24,7 +26,14 @@ const QuoteList = (props) => {
   const sortedQuotes = sortQuotes(props.quotes, isSortingAscending);
 
   const changeSortingHandler = () => {
-    history.push("/quotes?sort=" + (isSortingAscending ? "dec" : "asc"));
+    // We can pass an object if we have more complex destination for
+    // Example when query parameters are involved making it more readable\
+    // if the URL's are more complex
+    history.push({
+      pathname: location.pathname,
+      search: `?sort=${isSortingAscending ? "dec" : "asc"}`,
+    });
+    // history.push(`${location.pathname}?sort=${isSortingAscending ? "dec" : "asc"}`);
   };
 
   return (
