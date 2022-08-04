@@ -11,6 +11,29 @@ const MeetupDetails = () => {
   );
 };
 
+// getStaticPaths therefore is another important function,
+// which you need in dynamic pages to tell NextJS for which
+// dynamic parameter values this page should be pre-generated.
+export async function getStaticPaths() {
+  return {
+    fallback: false,
+    paths: [
+      {
+        params: {
+          meetupId: "m1",
+        },
+      },
+      {
+        params: {
+          meetupId: "m2",
+        },
+      },
+    ],
+  };
+}
+
+// With getStaticPropsa page is pre-generated during the
+// build process.
 export async function getStaticProps(context) {
   const meetupId = context.params.meetupId;
   console.log(meetupId);
