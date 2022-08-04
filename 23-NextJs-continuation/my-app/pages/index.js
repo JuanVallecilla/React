@@ -30,6 +30,11 @@ export async function getStaticProps() {
     props: {
       meetups: DUMMY_MEETUPS,
     },
+    // Incremental Static Generation
+    // This # is the number of seconds NextJs will
+    // wait until it regenerates this page for an
+    //  incoming request
+    revalidate: 1,
   };
 }
 
