@@ -18,12 +18,15 @@ class App extends Component {
     this.setState({ modalIsOpen: false });
   };
 
+  // Limitation is that React here doesn't wait for re-rendering this jsx
+  // and is not aware of the animation when dismissing the Modal
+  // *Removing happens instantly so we get no animation
   render() {
     return (
       <div className="App">
         <h1>React Animations</h1>
-        <Modal show={this.state.modalIsOpen} closed={this.closeModal} />
-        <Backdrop show={this.state.modalIsOpen} />
+        {this.state.modalIsOpen ? <Modal show={this.state.modalIsOpen} closed={this.closeModal} /> : null}
+        {this.state.modalIsOpen ? <Backdrop show={this.state.modalIsOpen} /> : null}
         <button className="Button" onClick={this.showModal}>
           Open Modal
         </button>
